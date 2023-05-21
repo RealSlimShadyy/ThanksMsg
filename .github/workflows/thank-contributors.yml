@@ -12,17 +12,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-  - name: Fetch Contributors
-  run: |
-    contributors=$(curl -s "https://api.github.com/repos/RealSlimShadyy/ThanksMsg/contributors" \
-      -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}")
-
-    # Extract relevant information from the contributors JSON response
-    # and store it in an environment variable
-    contributors_data=$(echo "$contributors" | jq -r '.[] | .login')
-    echo "CONTRIBUTORS=$contributors_data" >> $GITHUB_ENV
-
-
+      - name: Fetch Contributors
+        run: |
+          contributors=$(curl -s "https://api.github.com/repos/RealSlimShadyy/ThanksMsg/contributors" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}")
+          # Extract relevant information from the contributors JSON response
+          # and store it in an environment variable
+          contributors_data=$(echo "$contributors" | jq -r '.[] | .login')
+          echo "CONTRIBUTORS=$contributors_data" >> $GITHUB_ENV
 
       - name: Send Thank-You Messages
         run: |
@@ -32,4 +29,3 @@ jobs:
             # Example: Twitter API
             # tweet "Thank you, $contributor, for your contribution to our project! 🙌"
             echo "Thank you, $contributor, for your contribution to our project! 🙌"
-          done
