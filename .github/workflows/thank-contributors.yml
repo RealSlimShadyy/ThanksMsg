@@ -29,3 +29,4 @@ jobs:
             # Example: Twitter API
             # tweet "Thank you, $contributor, for your contribution to our project! 🙌"
             echo "Thank you, $contributor, for your contribution to our project! 🙌"
+          done
